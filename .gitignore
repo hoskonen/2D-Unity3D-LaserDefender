@@ -83,3 +83,6 @@ crashlytics-build.properties
 **/.idea/**/modules.xml
 
 
+.gitignore
+.idea/.idea.Laser Defender/.idea/vcs.xml
+Assets/Prefabs/
