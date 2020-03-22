@@ -82,7 +82,5 @@ crashlytics-build.properties
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 
-
-.gitignore
 .idea/.idea.Laser Defender/.idea/vcs.xml
 Assets/Prefabs/
