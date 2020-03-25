@@ -81,6 +81,8 @@ crashlytics-build.properties
 **/.idea/**/*.iml
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
+.idea
+/.idea
 
 .idea/.idea.Laser Defender/.idea/vcs.xml
 Assets/Prefabs/
