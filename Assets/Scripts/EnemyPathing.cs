@@ -4,17 +4,22 @@ using UnityEngine;
 public class EnemyPathing : MonoBehaviour
 {
     [SerializeField] private List<Transform> waypoints;
-    [SerializeField] private float moveSpeed = 10f;
-    int waypointIndex = 0;
+    [SerializeField] private float moveSpeed;
+    int waypointIndex;
+
+    private void Awake()
+    {
+        moveSpeed = 10f;
+        waypointIndex = 0;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         // Take position of the first waypoint node in our List
-        transform.position = waypoints[waypointIndex].position;
+        transform.position = waypoints[waypointIndex].transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
         MoveToWayPoints();
@@ -33,10 +38,10 @@ public class EnemyPathing : MonoBehaviour
                 waypointIndex++;
                 Debug.Log($"<color=green>{waypointIndex}</color>");
             }
-            else
-            {
-                Destroy(gameObject);
-            }
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 }
