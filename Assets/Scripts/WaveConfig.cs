@@ -23,7 +23,6 @@ public class WaveConfig : ScriptableObject
         foreach (Transform child in pathPrefab.transform)
         {
             waveWaypoints.Add(child);
-            Debug.Log($"<color=green>{waveWaypoints}</color>");
         }
 
         return waveWaypoints;

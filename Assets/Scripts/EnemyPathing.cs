@@ -3,14 +3,12 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
-    [SerializeField] private WaveConfig waveConfig;
+    WaveConfig waveConfig;
     private List<Transform> waypoints;
-    [SerializeField] private float moveSpeed;
     int waypointIndex;
 
     private void Awake()
     {
-        moveSpeed = 10f;
         waypointIndex = 0;
     }
 
@@ -27,18 +25,22 @@ public class EnemyPathing : MonoBehaviour
         MoveToWayPoints();
     }
 
+    public void SetWaveConfig(WaveConfig waveConfig)
+    {
+        this.waveConfig = waveConfig;
+    }
+
     private void MoveToWayPoints()
     {
         if (waypointIndex <= waypoints.Count - 1)
         {
             var targetPosition = waypoints[waypointIndex].transform.position;
-            var movementThisFrame = moveSpeed * Time.deltaTime;
+            var movementThisFrame = waveConfig.GetMoveSpeed() * Time.deltaTime;
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, movementThisFrame);
 
             if (transform.position == targetPosition)
             {
                 waypointIndex++;
-                Debug.Log($"<color=green>{waypointIndex}</color>");
             }
         }
         else
