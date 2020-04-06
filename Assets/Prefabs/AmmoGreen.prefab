@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3070629599961133850}
   - component: {fileID: 50665684306882356}
   - component: {fileID: 114231953468091834}
-  m_Layer: 0
+  - component: {fileID: 70310244940970690}
+  m_Layer: 11
   m_Name: AmmoGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,3 +116,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 100
+--- !u!70 &70310244940970690
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7110504250136393046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.09, y: 0.54}
+  m_Direction: 0

@@ -6,14 +6,20 @@ using UnityEngine.Serialization;
 public class Player : MonoBehaviour
 {
     // Configuration Parameters
-    [SerializeField] private float moveSpeed = 10f;
+    [Header("Player")] [SerializeField] private float moveSpeed = 10f;
+
+    [SerializeField] private int health = 200;
+
     [SerializeField] private float spaceShipPadding = 1f;
 
-    [FormerlySerializedAs("lazerAmmo")] [SerializeField] [CanBeNull]
+    [Header("Projectile")] [FormerlySerializedAs("lazerAmmo")] [SerializeField] [CanBeNull]
     private GameObject laserAmmo;
 
     [SerializeField] private float projectileSpeed = 10f;
     [SerializeField] private float projectileFiringPeriod = 0.02f;
+    [SerializeField] private AudioClip playerDieSound;
+    [SerializeField] AudioClip laserSound;
+    [SerializeField] [Range(0, 1)] private float playerDieSoundVolume = 0.7f;
 
     private Coroutine firingCoroutine;
 
@@ -34,6 +40,33 @@ public class Player : MonoBehaviour
         Fire();
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        var damageDealer = other.gameObject.GetComponent<DamageDealer>();
+        if (!damageDealer)
+        {
+            return;
+        }
+
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+        damageDealer.Hit();
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        AudioSource.PlayClipAtPoint(playerDieSound, Camera.main.transform.position, playerDieSoundVolume);
+        Destroy(gameObject);
+    }
+
     private void Fire()
     {
         if (Input.GetButtonDown("Fire1"))
@@ -52,6 +85,7 @@ public class Player : MonoBehaviour
         while (true)
         {
             GameObject lazer = Instantiate(laserAmmo, transform.position, Quaternion.identity) as GameObject;
+            AudioSource.PlayClipAtPoint(laserSound, Camera.main.transform.position, 0.5f);
             lazer.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
