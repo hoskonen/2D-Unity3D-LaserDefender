@@ -63,6 +63,8 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
+        var level = FindObjectOfType<Level>();
+        level.LoadGameOver(3);
         AudioSource.PlayClipAtPoint(playerDieSound, Camera.main.transform.position, playerDieSoundVolume);
         Destroy(gameObject);
     }
