@@ -7,6 +7,7 @@ public class Level : MonoBehaviour
     public void LoadScene(int sceneIndex)
     {
         SceneManager.LoadScene(sceneIndex);
+        FindObjectOfType<GameSession>().ResetGame();
     }
 
     public void LoadGameOver(float delay)

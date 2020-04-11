@@ -113,4 +113,9 @@ public class Player : MonoBehaviour
         if (gameCamera != null) yMinimum = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + spaceShipPadding;
         if (gameCamera != null) yMaximum = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - spaceShipPadding;
     }
+
+    public int GetHealth()
+    {
+        return health;
+    }
 }

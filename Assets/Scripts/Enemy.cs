@@ -2,17 +2,26 @@
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float health = 100;
-    [SerializeField] private float shotCounter;
+    [Header("Enemy Stats")] [SerializeField]
+    private float health = 100;
+
+    [Header("Shooting")] [SerializeField] private float shotCounter;
     [SerializeField] private float minTimeBetweenShots = 0.2f;
     [SerializeField] private float maxTimeBetweenShots = 0.5f;
     [SerializeField] private GameObject enemyProjectile;
     [SerializeField] private float projectileSpeed = 10f;
-    [SerializeField] private GameObject explosionParticle;
+
+    [Header("Sound Effects")] [SerializeField]
+    private GameObject explosionParticle;
+
     [SerializeField] private float durationOfExplosion = 1f;
     [SerializeField] private AudioClip enemyDieSound;
     [SerializeField] private AudioClip enemyLaser;
     [SerializeField] [Range(0, 1)] private float enemyLaserVolume = 0.5f;
+
+    private int scoreValue;
+
+    private GameSession gameSession;
 
     private void CountdownAndShoot()
     {
@@ -59,11 +68,18 @@ public class Enemy : MonoBehaviour
             Instantiate(explosionParticle, transform.position, Quaternion.identity) as GameObject;
         Destroy(gameObject);
         Destroy(explosion, durationOfExplosion);
+        gameSession.AddScore(scoreValue);
+    }
+
+    private void Awake()
+    {
+        scoreValue = Random.Range(100, 5000);
     }
 
     private void Start()
     {
         shotCounter = Random.Range(minTimeBetweenShots, maxTimeBetweenShots);
+        gameSession = FindObjectOfType<GameSession>();
     }
 
     private void Update()
